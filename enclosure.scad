@@ -4,21 +4,31 @@ $fs = .4;
 
 // Dimensions (in mm)
 
-esp_board_w = 15; // 14.78
-esp_board_d = 25; // 24.60
-esp_board_h = 3;  // 3.14
+esp_board_w = 15;     // 14.78
+esp_board_d = 25;     // 24.60
+esp_board_h = 3;      // 3.14
+esp_board_w_of = 0.4; // Not measured
+
+esp_conn_h = 2.9; // 2.90
 
 dht_board_w = 21;  // 20.90
 dht_board_d = 26;  // 25.29
 dht_board_h = 1.6; // 1.61
 
-dht_conn_w = 11; // 10.52
-dht_conn_d = 5;  // 4.93
-dht_conn_h = 9;  // 8.88
+dht_conn_w = 11;     // 10.52
+dht_conn_d = 5;      // 4.93
+dht_conn_h = 9;      // 8.88
+dht_conn_w_of = 1.5; // 11.54
 
-dht_w = 13; // 12.54
-dht_d = 16; // 15.87
-dht_h = 6;  // 6.01
+dht_w = 13;     // 12.54
+dht_d = 16;     // 16.20
+dht_h = 6;      // 6.01
+dht_d_of = 0.8; // Offset from DHT module and board
+
+dht_btn_w = 3;      // 3.33
+dht_btn_d = 6;      // 6.06
+dht_btn_h = 3;      // 2.99
+dht_btn_d_of = 1.8; // 1.84
 
 usb_board_w = 15;  // 14.48
 usb_board_d = 15;  // 14.85
@@ -35,6 +45,7 @@ usb_hole_d_of = 5.5; // 5.50 - From oposite side of USB connector
 
 // USB Connector Board
 module usb_connector() {
+  // Board
   color("green")
     difference() {
       cube([usb_board_w, usb_board_d, usb_board_h], center=true);
@@ -48,10 +59,54 @@ module usb_connector() {
       }
     }
 
+  // Connector
   color("grey")
     translate([0, usb_board_d/2 - usb_conn_d/2 + usb_conn_d_of, usb_board_h/2 + usb_conn_h/2])
     cube([usb_conn_w, usb_conn_d, usb_conn_h], center=true);
 }
 
+// DHT Shield Board + ESP Board
+module dht_board() {
+  // Board
+  color("blue")
+    cube([dht_board_w, dht_board_d, dht_board_h], center=true);
+
+  // DHT Module
+  color("deepskyblue")
+    translate([dht_board_w/2-dht_w/2, dht_board_d/2+dht_d/2 + dht_d_of, dht_h/2 - dht_board_h/2])
+    cube([dht_w, dht_d, dht_h], center=true);
+
+  // ESP Connectors
+  color("yellow")
+    translate([
+      dht_board_w/2-dht_conn_w/2 - dht_conn_w_of,
+      -(dht_board_d/2-dht_conn_d/2),
+      dht_conn_h/2 + dht_board_h/2
+    ])
+    cube([dht_conn_w, dht_conn_d, dht_conn_h], center=true);
+
+  // Reset Button
+  color("#222222") // Almost Black
+    translate([
+      -(dht_board_w/2 - dht_btn_w/2),
+      dht_board_d/2 - dht_btn_d/2 - dht_btn_d_of,
+      dht_board_h/2 + dht_btn_h/2
+    ])
+    cube([dht_btn_w, dht_btn_d, dht_btn_h], center=true);
+
+  // ESP Board
+  color("#222222") // Almost Black
+    translate([
+      dht_board_w/2 - esp_board_w/2 + esp_board_w_of,
+      0,
+      dht_board_h/2 + esp_board_h/2 + esp_conn_h + dht_conn_h
+    ])
+    cube([esp_board_w, esp_board_d, esp_board_h], center=true);
+}
+
 // Assembly
-usb_connector();
+translate([0, 25, 15])
+  rotate([0, 180, 0])
+  usb_connector();
+
+dht_board();
