@@ -6,7 +6,7 @@ DIY HA compatible Temperature & Humidity Sensor
 
 ## USB Board 
 
-Before printing the full enclosure, it's better to test if the dimensions of the USB board are correct enough by printing a simplified support:
+Before printing the full enclosure, it's better to test if the dimensions of the USB board are correct enough by printing a [simplified support](https://github.com/meunomemauricio/hygrometer/blob/55d7b5796571c836265a8d19b533122486286a11/enclosure.scad#L113-L140).
 
 | Simplified Support |  Board fit
 :-------------------:|:-------------------------:
