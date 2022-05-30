@@ -1,4 +1,5 @@
 // Hygrometer Enclosure
+
 $fa = 1;
 $fs = .4;
 
@@ -42,6 +43,11 @@ usb_conn_d_of = 1; // 1.02
 usb_hole_d = 3.5;    // 3.48
 usb_hole_w_of = 8.5; // 8.45 - Between the holes. Assuming they're centered.
 usb_hole_d_of = 5.5; // 5.50 - From oposite side of USB connector
+
+usb_sup_base_h = 2;
+usb_sup_base_d = 3.7;
+
+usb_sup_hole_d = 1.4;  // For M1.6 screws
 
 // USB Connector Board
 module usb_connector() {
@@ -104,7 +110,36 @@ module dht_board() {
     cube([esp_board_w, esp_board_d, esp_board_h], center=true);
 }
 
-// Assembly
+// USB Board Support Fit Test
+// Simplified model of the USB Board support to test dimensions and proper fit.
+module usb_fit_test() {
+  support_h = 2;
+  translate([0, 0, support_h/2])
+    cube([20, 20, support_h], center=true);
+
+  translate([
+      0,
+      -((usb_board_d/2)-usb_hole_d_of),
+      support_h/2 + usb_sup_base_h/2
+    ]) {
+    translate([usb_hole_w_of/2, 0, 0])
+      difference() {
+        cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
+        cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+      }
+
+    translate([-usb_hole_w_of/2, 0, 0])
+      difference() {
+        cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
+        cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+      }
+  }
+
+  // translate([0, 0, support_h + usb_sup_base_h + usb_board_h/2 + 0.1])
+  //   usb_connector();
+}
+
+// Final Assembly
 translate([0, 25, 15])
   rotate([0, 180, 0])
   usb_connector();
