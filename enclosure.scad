@@ -65,6 +65,15 @@ usb_sup_base_d = 3.7;
 
 usb_sup_hole_d = 1.4;  // For M1.6 screws
 
+// TODO: Correct dimensions
+usb_slot_w = usb_conn_w + 4;
+usb_slot_d = enc_tk + _min_cl*2;
+usb_slot_h = usb_conn_h + 4;
+
+usb_slot_w_of = 0;
+usb_slot_d_of = enc_d/2 - usb_slot_d/2 + _min_cl;
+usb_slot_h_of = 4;
+
 // USB Connector Board
 module usb_connector() {
   // Board
@@ -132,6 +141,10 @@ module enclosure() {
     cube([enc_w, enc_d, enc_h], center=true);
     translate([0, 0, enc_tk/2])
       cube([enc_w-(enc_tk*2), enc_d-(enc_tk*2), (enc_h-enc_tk)+_min_cl], center=true);
+
+    // USB slot
+    translate([usb_slot_w_of, usb_slot_d_of, usb_slot_h_of])
+      cube([usb_slot_w, usb_slot_d, usb_slot_h], center=true);
   }
 }
 
