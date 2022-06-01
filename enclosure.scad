@@ -38,6 +38,15 @@ dht_d = 16;     // 16.20
 dht_h = 6;      // 6.01
 dht_d_of = 0.8; // Offset from DHT module and board
 
+// TODO: Validate dimensions
+dht_slot_w = dht_w;
+dht_slot_d = dht_d;
+dht_slot_h = enc_tk + _min_cl * 2;
+
+dht_slot_w_of = 4;  // Make dependent
+dht_slot_d_of = 10;  // Make dependent
+dht_slot_h_of = -enc_h/2 + enc_tk/2;
+
 dht_btn_w = 3;      // 3.33
 dht_btn_d = 6;      // 6.06
 dht_btn_h = 3;      // 2.99
@@ -145,7 +154,12 @@ module enclosure() {
     // USB slot
     translate([usb_slot_w_of, usb_slot_d_of, usb_slot_h_of])
       cube([usb_slot_w, usb_slot_d, usb_slot_h], center=true);
+
+    // DHT slot
+    translate([dht_slot_w_of, dht_slot_d_of, dht_slot_h_of])
+      cube([dht_slot_w, dht_slot_d, dht_slot_h], center=true);
   }
+
 }
 
 // USB Board Support Fit Test
@@ -178,7 +192,6 @@ module usb_fit_test() {
 }
 
 // Final Assembly
-
 translate([0, usb_enc_d_of, usb_enc_h_of])
   rotate([0, 180, 0])
   usb_connector();
@@ -190,6 +203,8 @@ color("gray")
   translate([0, 0, enc_h/2]) {  // So enclosure is above z=0 plane
     difference() {
       enclosure();
+
+      // Uncomment to cut enclosure in half on the x=0 plane
       // translate([50, 0, 0])
       //   cube([100, 100, 100], center=true);
     }
