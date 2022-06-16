@@ -14,6 +14,16 @@ enc_h = 25;
 
 enc_tk = 3;
 
+lid_h = enc_tk;
+
+lid_ridge_w = enc_w - (enc_tk + _min_cl) * 2;
+lid_ridge_d = enc_d - (enc_tk + _min_cl) * 2;
+lid_ridge_h = 2;
+
+lid_hollow_w = lid_ridge_w - 3;
+lid_hollow_d = lid_ridge_d - 3;
+lid_hollow_h = lid_ridge_h;
+
 esp_board_w = 15;     // 14.78
 esp_board_d = 25;     // 24.60
 esp_board_h = 3;      // 3.14
@@ -159,7 +169,18 @@ module enclosure() {
     translate([dht_slot_w_of, dht_slot_d_of, dht_slot_h_of])
       cube([dht_slot_w, dht_slot_d, dht_slot_h], center=true);
   }
+}
 
+// Enclosure Lid
+module enclosure_lid() {
+  cube([enc_w, enc_d, lid_h], center=true);
+
+  // Ridge
+  translate([0, 0, -lid_ridge_h])
+    difference() {
+      cube([lid_ridge_w, lid_ridge_d, lid_ridge_h], center=true);
+      cube([lid_hollow_w, lid_hollow_d, lid_hollow_h + _min_cl], center=true);
+    }
 }
 
 // USB Board Support Fit Test
@@ -207,5 +228,15 @@ color("gray")
       // Uncomment to cut enclosure in half on the x=0 plane
       // translate([50, 0, 0])
       //   cube([100, 100, 100], center=true);
+
+      // Uncomment to cut enclosure in half on the y=0 plane
+      // translate([0, 50, 0])
+      //   cube([100, 100, 100], center=true);
     }
   }
+
+color("white")
+  // translate([0, 0, enc_h + lid_h/2])  // Lid closed
+  translate([0, 0, enc_h + lid_h/2 + 20])  // Lid open
+  // rotate([0, 180, 0])  // Lid bottom up
+  enclosure_lid();
