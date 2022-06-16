@@ -17,7 +17,7 @@ lid_ridge_h = 2;
 
 lid_hollow_w = lid_ridge_w - 3;
 lid_hollow_d = lid_ridge_d - 3;
-lid_hollow_h = lid_ridge_h;
+lid_hollow_h = lid_ridge_h + 2 * _min_cl;
 
 esp_board_w = 15;     // 14.78
 esp_board_d = 25;     // 24.60
@@ -74,8 +74,12 @@ usb_hole_d = 3.5;    // 3.48
 usb_hole_w_of = 8.5; // 8.45 - Between the holes. Assuming they're centered.
 usb_hole_d_of = 5.5; // 5.50 - From oposite side of USB connector
 
-usb_sup_base_h = 2;
+// TODO: Fix usb_sup_base_h
+usb_sup_base_h = 7;
 usb_sup_base_d = 3.7;
+
+usb_sup_base_h_of = -lid_h/2 - usb_sup_base_h; // From lid center
+usb_sup_base_d_of = usb_enc_d_of - enc_tk; // From lid center
 
 usb_sup_hole_d = 1.4;  // For M1.6 screws
 

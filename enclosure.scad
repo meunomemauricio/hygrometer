@@ -32,8 +32,25 @@ module enclosure_lid() {
   translate([0, 0, -lid_ridge_h])
     difference() {
       cube([lid_ridge_w, lid_ridge_d, lid_ridge_h], center=true);
-      cube([lid_hollow_w, lid_hollow_d, lid_hollow_h + _min_cl], center=true);
+      cube([lid_hollow_w, lid_hollow_d, lid_hollow_h], center=true);
     }
+
+  // USB Board Support
+  translate([0, usb_sup_base_d_of, usb_sup_base_h_of]) {
+    translate([usb_hole_w_of/2, 0, 0])
+      difference() {
+        cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
+        translate([0, 0, -_min_cl])
+          cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+      }
+
+    translate([-usb_hole_w_of/2, 0, 0])
+      difference() {
+        cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
+        translate([0, 0, -_min_cl])
+          cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+      }
+  }
 }
 
 // Final Assembly
@@ -59,8 +76,14 @@ color("gray")
     }
   }
 
-// color("white")
-  // translate([0, 0, enc_h + lid_h/2])  // Lid closed
-  // translate([0, 0, enc_h + lid_h/2 + 20])  // Lid open
-  // rotate([0, 180, 0])  // Lid bottom up
-  // enclosure_lid();
+color("white")
+  translate([0, 0, enc_h + lid_h/2])
+  translate([0, 0, 20])  // Uncomment to open lid
+  // rotate([0, 180, 0])  // Uncomment to flip lid
+  difference() {
+    enclosure_lid();
+
+    // Uncomment to cut lid in half on the x=0 plane
+    // translate([50, 0, 0])
+    //   cube([100, 100, 100], center=true);
+  }

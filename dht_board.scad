@@ -1,8 +1,5 @@
 // DHT Shield Board + ESP Board
 
-$fa = 1;
-$fs = .4;
-
 include <dimensions.scad>
 
 module dht_board() {

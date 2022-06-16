@@ -1,6 +1,9 @@
 // USB Board Support Fit Test
 // Simplified model of the USB Board support to test dimensions and proper fit.
 
+$fa = 1;
+$fs = .4;
+
 include <dimensions.scad>
 include <usb_board.scad>
 

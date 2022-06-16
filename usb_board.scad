@@ -1,8 +1,5 @@
 // USB Connector Board
 
-$fa = 1;
-$fs = .4;
-
 include <dimensions.scad>
 
 module usb_board() {
@@ -25,3 +22,6 @@ module usb_board() {
     translate([0, usb_board_d/2 - usb_conn_d/2 + usb_conn_d_of, usb_board_h/2 + usb_conn_h/2])
     cube([usb_conn_w, usb_conn_d, usb_conn_h], center=true);
 }
+
+
+// usb_board();
