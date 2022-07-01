@@ -61,24 +61,9 @@ translate([0, usb_enc_d_of, usb_enc_h_of])
 translate([0, dht_enc_d_of, dht_enc_h_of])
   dht_board();
 
-color("gray")
-  translate([0, 0, enc_h/2]) {  // So enclosure is above z=0 plane
-    difference() {
-      enclosure();
-
-      // Uncomment to cut enclosure in half on the x=0 plane
-      // translate([50, 0, 0])
-      //   cube([100, 100, 100], center=true);
-
-      // Uncomment to cut enclosure in half on the y=0 plane
-      // translate([0, 50, 0])
-      //   cube([100, 100, 100], center=true);
-    }
-  }
-
 color("white")
   translate([0, 0, enc_h + lid_h/2])
-  translate([0, 0, 20])  // Uncomment to open lid
+  // translate([0, 0, 20])  // Uncomment to open lid
   // rotate([0, 180, 0])  // Uncomment to flip lid
   difference() {
     enclosure_lid();
@@ -86,4 +71,20 @@ color("white")
     // Uncomment to cut lid in half on the x=0 plane
     // translate([50, 0, 0])
     //   cube([100, 100, 100], center=true);
+  }
+
+// color("gray", 0.8) // Uncomment for transparency
+color("gray")
+  translate([0, 0, enc_h/2]) {  // So enclosure is above z=0 plane
+    difference() {
+      enclosure();
+
+      // Uncomment to cut enclosure in half on the x=0 plane
+      translate([50, 0, 0])
+        cube([100, 100, 100], center=true);
+
+      // Uncomment to cut enclosure in half on the y=0 plane
+      // translate([0, 50, 0])
+      //   cube([100, 100, 100], center=true);
+    }
   }
