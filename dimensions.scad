@@ -3,21 +3,36 @@
 // Minimal Clearance
 _min_cl = 0.5;
 
-enc_w = 32;
+// Enclosure
+
+enc_w = 36;
 enc_d = 60;
 enc_h = 25;
 
 enc_tk = 2;
 
+// Enclosure Lid
+
 lid_h = enc_tk;
 
-lid_ridge_w = enc_w - (enc_tk + _min_cl) * 2;
-lid_ridge_d = enc_d - (enc_tk + _min_cl) * 2;
-lid_ridge_h = 2;
+// Screw Inserts
 
-lid_hollow_w = lid_ridge_w - 3;
-lid_hollow_d = lid_ridge_d - 3;
-lid_hollow_h = lid_ridge_h + 2 * _min_cl;
+screw_ins_r = 2;
+screw_ins_h = 5;
+
+screw_ins_h_of = screw_ins_h + enc_tk + _min_cl * 1.1;
+
+// Screw Supports
+
+screw_sup_w = screw_ins_r * 2 + 1.6;
+screw_sup_d = screw_ins_r * 2 + 1.6;
+screw_sup_h = enc_h;
+
+screw_sup_w_of = enc_w/2 - screw_sup_w/2;
+screw_sup_d_of = enc_d/2 - screw_sup_d/2;
+screw_sup_h_of = 0;
+
+// ESP Board
 
 esp_board_w = 15;     // 14.78
 esp_board_d = 25;     // 24.60
@@ -25,6 +40,8 @@ esp_board_h = 3;      // 3.14
 esp_board_w_of = 0.4; // Not measured
 
 esp_conn_h = 2.9; // 2.90
+
+// DHT Board
 
 dht_board_w = 21;  // 20.90
 dht_board_d = 26;  // 25.29
@@ -56,6 +73,8 @@ dht_btn_w = 3;      // 3.33
 dht_btn_d = 6;      // 6.06
 dht_btn_h = 3;      // 2.99
 dht_btn_d_of = 1.8; // 1.84
+
+// USB Board
 
 usb_board_w = 15;  // 14.48
 usb_board_d = 15;  // 14.85
