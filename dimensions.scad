@@ -15,10 +15,18 @@ enc_tk = 2;
 
 lid_h = enc_tk;
 
+// Lid Screw Holes
+
+lid_hole_r = 3/2;  // M3 screws
+lid_hole_h = lid_h * 1.2;
+
+lid_pocket_r = 6.1 / 2;  // Screw Head Pocket
+lid_pocket_h = 1.1;
+
 // Screw Inserts
 
-screw_ins_r = 2;
-screw_ins_h = 5;
+screw_ins_r = 4/2;
+screw_ins_h = 6;
 
 screw_ins_h_of = screw_ins_h + enc_tk + _min_cl * 1.1;
 
@@ -28,8 +36,8 @@ screw_sup_w = screw_ins_r * 2 + 1.6;
 screw_sup_d = screw_ins_r * 2 + 1.6;
 screw_sup_h = enc_h;
 
-screw_sup_w_of = enc_w/2 - screw_sup_w/2;
-screw_sup_d_of = enc_d/2 - screw_sup_d/2;
+screw_sup_w_of = enc_w/2 - screw_sup_w/2 - enc_tk;
+screw_sup_d_of = enc_d/2 - screw_sup_d/2 - enc_tk;
 screw_sup_h_of = 0;
 
 // ESP Board

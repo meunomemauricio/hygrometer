@@ -1,7 +1,7 @@
 // Hygrometer Enclosure
 
 $fa = 1;
-$fs = .4;
+$fs = .4;  // .1 for exporting
 
 include <dimensions.scad>
 include <usb_board.scad>
@@ -62,26 +62,56 @@ module enclosure() {
   }
 }
 
+module lid_main_body() {
+  cube([enc_w, enc_d, lid_h], center=true);
+
+  // USB Board Support
+  translate([0, usb_sup_base_d_of, usb_sup_base_h_of]) {
+    translate([usb_hole_w_of/2, 0, 0])
+      difference() {
+        cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
+        translate([0, 0, -_min_cl])
+          cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+      }
+
+    translate([-usb_hole_w_of/2, 0, 0])
+      difference() {
+        cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
+        translate([0, 0, -_min_cl])
+          cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+      }
+  }
+}
+
+module lid_holes() {
+  translate([screw_sup_w_of, screw_sup_d_of, 0]) {
+    cylinder(h=lid_pocket_h, r=lid_pocket_r);
+    translate([0, 0, -lid_h])
+      cylinder(h=lid_hole_h, r=lid_hole_r);
+  }
+  translate([-screw_sup_w_of, screw_sup_d_of, 0]) {
+    cylinder(h=lid_pocket_h, r=lid_pocket_r);
+    translate([0, 0, -lid_h])
+      cylinder(h=lid_hole_h, r=lid_hole_r);
+  }
+  translate([screw_sup_w_of, -screw_sup_d_of, 0]) {
+    cylinder(h=lid_pocket_h, r=lid_pocket_r);
+    translate([0, 0, -lid_h])
+      cylinder(h=lid_hole_h, r=lid_hole_r);
+  }
+  translate([-screw_sup_w_of, -screw_sup_d_of, 0]) {
+    cylinder(h=lid_pocket_h, r=lid_pocket_r);
+    translate([0, 0, -lid_h])
+      cylinder(h=lid_hole_h, r=lid_hole_r);
+  }
+}
+
 // Enclosure Lid
 module enclosure_lid() {
   color("white") {
-    cube([enc_w, enc_d, lid_h], center=true);
-
-    // USB Board Support
-    translate([0, usb_sup_base_d_of, usb_sup_base_h_of]) {
-      translate([usb_hole_w_of/2, 0, 0])
-        difference() {
-          cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
-          translate([0, 0, -_min_cl])
-            cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
-        }
-
-      translate([-usb_hole_w_of/2, 0, 0])
-        difference() {
-          cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
-          translate([0, 0, -_min_cl])
-            cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
-        }
+    difference() {
+      lid_main_body();
+      lid_holes();
     }
   }
 }
