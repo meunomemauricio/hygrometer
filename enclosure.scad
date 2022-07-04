@@ -138,8 +138,8 @@ translate([0, 0, enc_h/2]) {  // So enclosure is above z=0 plane
     enclosure();
 
     // Uncomment to cut enclosure in half on the x=0 plane
-    // translate([50, 0, 0])
-    //   cube([100, 100, 100], center=true);
+    translate([50, 0, 0])
+      cube([100, 100, 100], center=true);
 
     // Uncomment to cut enclosure in half on the y=0 plane
     // translate([0, 50, 0])
