@@ -5,9 +5,9 @@ _min_cl = 0.2;
 
 // Enclosure
 
-enc_w = 36;
+enc_w = 38;
 enc_d = 65;
-enc_h = 25;
+enc_h = 20.5;
 
 enc_tk = 2;
 
@@ -25,10 +25,10 @@ lid_pocket_h = 1.1;
 
 // Screw Inserts
 
-screw_ins_r = 4/2;
+screw_ins_r = 4.2/2;
 screw_ins_h = 6;
 
-screw_ins_h_of = screw_ins_h + enc_tk + _min_cl * 1.1;
+screw_ins_h_of = enc_h / 2 - screw_ins_h + _min_cl * 1.1;
 
 // Screw Supports
 
@@ -56,7 +56,7 @@ dht_board_d = 26;  // 25.29
 dht_board_h = 1.6; // 1.61
 
 dht_enc_d_of = -(enc_d/2 - dht_board_d/2) + enc_tk + 2;  // Distance from the enclosure
-dht_enc_h_of = enc_tk + 2;
+dht_enc_h_of = enc_tk + 1.5;
 
 dht_conn_w = 11;     // 10.52
 dht_conn_d = 5;      // 4.93
@@ -110,7 +110,7 @@ usb_sup_base_h_of = -enc_h / 2 + enc_tk;
 
 usb_sup_hole_d = 1.4;  // For M1.6 screws
 
-usb_sup_hole_h_of = - enc_h / 2 - enc_tk + usb_sup_base_h;
+usb_sup_hole_h_of = -enc_h / 2 + usb_sup_base_h - usb_board_h / 2;
 
 usb_slot_w = usb_conn_w + 4;
 usb_slot_d = enc_tk + _min_cl*2;
