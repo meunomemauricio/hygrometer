@@ -17,10 +17,10 @@ lid_h = enc_tk;
 
 // Lid Screw Holes
 
-lid_hole_r = 3/2;  // M3 screws
+lid_hole_r = 3.2/2;  // M3 screws
 lid_hole_h = lid_h * 1.2;
 
-lid_pocket_r = 6.1 / 2;  // Screw Head Pocket
+lid_pocket_r = 6.4 / 2;  // Screw Head Pocket
 lid_pocket_h = 1.1;
 
 // Screw Inserts
@@ -32,12 +32,12 @@ screw_ins_h_of = screw_ins_h + enc_tk + _min_cl * 1.1;
 
 // Screw Supports
 
-screw_sup_w = screw_ins_r * 2 + 1.6;
-screw_sup_d = screw_ins_r * 2 + 1.6;
+screw_sup_w = screw_ins_r * 2 + 2.2;
+screw_sup_d = screw_ins_r * 2 + 2.2;
 screw_sup_h = enc_h;
 
-screw_sup_w_of = enc_w/2 - screw_sup_w/2 - enc_tk;
-screw_sup_d_of = enc_d/2 - screw_sup_d/2 - enc_tk;
+screw_sup_w_of = enc_w/2 - screw_sup_w/2 - enc_tk + 1;
+screw_sup_d_of = enc_d/2 - screw_sup_d/2 - enc_tk + 1;
 screw_sup_h_of = 0;
 
 // ESP Board
@@ -109,7 +109,6 @@ usb_sup_base_d_of = usb_enc_d_of - enc_tk; // From lid center
 
 usb_sup_hole_d = 1.4;  // For M1.6 screws
 
-// TODO: Correct dimensions
 usb_slot_w = usb_conn_w + 4;
 usb_slot_d = enc_tk + _min_cl*2;
 usb_slot_h = usb_conn_h + 4;

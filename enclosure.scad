@@ -117,7 +117,6 @@ module enclosure_lid() {
 }
 
 // Final Assembly
-translate([0, 0, 20])  // Uncomment to open lid
 translate([0, usb_enc_d_of, usb_enc_h_of])
   rotate([0, 180, 0])
   usb_board();
