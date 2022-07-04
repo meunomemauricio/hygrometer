@@ -146,3 +146,19 @@ translate([0, 0, enc_h/2]) {  // So enclosure is above z=0 plane
     //   cube([100, 100, 100], center=true);
   }
 }
+
+// Uncomment for Lid Screw Guides
+// color("red") {
+//   translate([screw_sup_w_of, screw_sup_d_of, enc_tk]) {
+//     cylinder(h=50, r=lid_hole_r);
+//   }
+//   translate([-screw_sup_w_of, screw_sup_d_of, enc_tk]) {
+//     cylinder(h=50, r=lid_hole_r);
+//   }
+//   translate([screw_sup_w_of, -screw_sup_d_of, enc_tk]) {
+//     cylinder(h=50, r=lid_hole_r);
+//   }
+//   translate([-screw_sup_w_of, -screw_sup_d_of, enc_tk]) {
+//     cylinder(h=50, r=lid_hole_r);
+//   }
+// }
