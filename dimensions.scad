@@ -1,12 +1,12 @@
 // Dimensions (in mm)
 
 // Minimal Clearance
-_min_cl = 0.5;
+_min_cl = 0.2;
 
 // Enclosure
 
 enc_w = 36;
-enc_d = 60;
+enc_d = 65;
 enc_h = 25;
 
 enc_tk = 2;
@@ -74,7 +74,7 @@ dht_slot_d = dht_d;
 dht_slot_h = enc_tk + _min_cl * 2;
 
 dht_slot_w_of = 4;  // Make dependent
-dht_slot_d_of = 10;  // Make dependent
+dht_slot_d_of = 6.3;  // Make dependent
 dht_slot_h_of = -enc_h/2 + enc_tk/2;
 
 dht_btn_w = 3;      // 3.33
@@ -101,13 +101,16 @@ usb_hole_d = 3.5;    // 3.48
 usb_hole_w_of = 8.5; // 8.45 - Between the holes. Assuming they're centered.
 usb_hole_d_of = 5.5; // 5.50 - From oposite side of USB connector
 
-usb_sup_base_h = enc_h - usb_enc_h_of - usb_board_h/2 - 0.1;
+usb_sup_base_h = usb_enc_h_of - enc_tk - usb_board_h/2;
 usb_sup_base_d = 3.7;
 
-usb_sup_base_h_of = -lid_h/2 - usb_sup_base_h; // From lid center
+usb_sup_base_w_of = usb_hole_w_of / 2 ;
 usb_sup_base_d_of = usb_enc_d_of - enc_tk; // From lid center
+usb_sup_base_h_of = -enc_h / 2 + enc_tk;
 
 usb_sup_hole_d = 1.4;  // For M1.6 screws
+
+usb_sup_hole_h_of = - enc_h / 2 - enc_tk + usb_sup_base_h;
 
 usb_slot_w = usb_conn_w + 4;
 usb_slot_d = enc_tk + _min_cl*2;
