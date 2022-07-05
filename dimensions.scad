@@ -93,7 +93,7 @@ usb_board_d = 15;  // 14.85
 usb_board_h = 1.1; // 1.10
 
 // Distance from the enclosure
-usb_enc_d_of = enc_d / 2 - usb_board_d / 2 - enc_tk - 1;
+usb_enc_d_of = enc_d / 2 - usb_board_d / 2 - enc_tk - .4;
 usb_enc_h_of = enc_tk + 12;
 
 usb_conn_w = 7.3;  // 7.30
