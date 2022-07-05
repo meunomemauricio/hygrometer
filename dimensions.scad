@@ -34,11 +34,15 @@ screw_ins_h_of = enc_h / 2 - screw_ins_h + _min_cl * 1.1;
 
 screw_sup_w = screw_ins_r * 2 + 2.2;
 screw_sup_d = screw_ins_r * 2 + 2.2;
-screw_sup_h = enc_h;
+screw_sup_h = enc_h - enc_tk;
 
 screw_sup_w_of = enc_w/2 - screw_sup_w/2 - enc_tk + 1;
 screw_sup_d_of = enc_d/2 - screw_sup_d/2 - enc_tk + 1;
-screw_sup_h_of = 0;
+screw_sup_h_of = enc_tk/2;
+
+// Enclosure Mesh
+
+enc_mesh_tk = 1;
 
 // ESP Board
 

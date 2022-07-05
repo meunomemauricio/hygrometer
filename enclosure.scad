@@ -7,6 +7,39 @@ include <dimensions.scad>
 include <usb_board.scad>
 include <dht_board.scad>
 
+// Enclosure Mesh
+module enc_mesh() {
+  range_w = enc_w/2 - enc_tk * 2;
+  range_d = enc_d/2 - enc_tk * 2;
+  range_h = enc_h/2 - enc_tk * 2;
+
+  color("red") {
+    // Vertical holes for the top surface
+    for (step_w = [-range_w : enc_mesh_tk * 2 : range_w]) {
+      for (step_d = [-range_d: enc_mesh_tk * 2 : range_d]) {
+        translate([step_w, step_d, 0])
+          cube([enc_mesh_tk, enc_mesh_tk, enc_h + _min_cl * 2], center=true);
+      }
+    }
+
+    // Horizontal holes for the lateral surfaces
+    for (step_d = [-range_d : enc_mesh_tk * 2 : range_d]) {
+      for (step_h = [-range_h: enc_mesh_tk * 2 : range_h]) {
+        translate([0, step_d, step_h])
+          cube([enc_w + _min_cl * 2, enc_mesh_tk, enc_mesh_tk], center=true);
+      }
+    }
+
+    // Horizontal holes for the ??? surface
+    for (step_w = [-range_w : enc_mesh_tk * 2 : range_w]) {
+      for (step_h = [-range_h: enc_mesh_tk * 2 : range_h]) {
+        translate([step_w, -enc_d/2 + enc_tk/2, step_h])
+          cube([enc_mesh_tk, enc_tk * 2, enc_mesh_tk], center=true);
+      }
+    }
+  }
+}
+
 // Main Enclosure Body
 module enc_main_body() {
   difference() {
@@ -18,22 +51,18 @@ module enc_main_body() {
     // USB slot
     translate([usb_slot_w_of, usb_slot_d_of, usb_slot_h_of])
       cube([usb_slot_w, usb_slot_d, usb_slot_h], center=true);
-
-    // DHT slot
-    translate([dht_slot_w_of, dht_slot_d_of, dht_slot_h_of])
-      cube([dht_slot_w, dht_slot_d, dht_slot_h], center=true);
   }
 }
 
 // Lid Screw Supports
 module enc_screw_sup() {
-  translate([screw_sup_w_of, screw_sup_d_of, 0])
+  translate([screw_sup_w_of, screw_sup_d_of, screw_sup_h_of])
     cube([screw_sup_w, screw_sup_d, screw_sup_h], center=true);
-  translate([-screw_sup_w_of, screw_sup_d_of, 0])
+  translate([-screw_sup_w_of, screw_sup_d_of, screw_sup_h_of])
     cube([screw_sup_w, screw_sup_d, screw_sup_h], center=true);
-  translate([screw_sup_w_of, -screw_sup_d_of, 0])
+  translate([screw_sup_w_of, -screw_sup_d_of, screw_sup_h_of])
     cube([screw_sup_w, screw_sup_d, screw_sup_h], center=true);
-  translate([-screw_sup_w_of, -screw_sup_d_of, 0])
+  translate([-screw_sup_w_of, -screw_sup_d_of, screw_sup_h_of])
     cube([screw_sup_w, screw_sup_d, screw_sup_h], center=true);
 }
 
@@ -74,12 +103,15 @@ module enclosure() {
   color("gray") {
     difference() {
       union() {
-        enc_main_body();
+        difference() {
+          enc_main_body();
+          enc_mesh();
+        }
         enc_screw_sup();
-        usb_support();
       }
       screw_ins();
     }
+    usb_support();
   }
 }
 
