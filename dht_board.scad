@@ -40,4 +40,4 @@ module dht_board() {
     cube([esp_board_w, esp_board_d, esp_board_h], center=true);
 }
 
-// dht_board();
+dht_board();

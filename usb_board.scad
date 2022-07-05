@@ -23,5 +23,4 @@ module usb_board() {
     cube([usb_conn_w, usb_conn_d, usb_conn_h], center=true);
 }
 
-
-// usb_board();
+usb_board();

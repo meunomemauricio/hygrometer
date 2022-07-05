@@ -4,8 +4,9 @@ $fa = 1;
 $fs = .4;  // .1 for exporting
 
 include <dimensions.scad>
-include <usb_board.scad>
-include <dht_board.scad>
+
+use <usb_board.scad>
+use <dht_board.scad>
 
 // Enclosure Mesh
 module enc_mesh() {
@@ -73,15 +74,26 @@ module usb_support() {
       difference() {
         cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
         translate([0, 0, usb_sup_hole_h_of])
-          cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+          cylinder(d=usb_sup_hole_d, h=usb_sup_hole_h);
       }
 
     translate([-usb_sup_base_w_of, 0, 0])
       difference() {
         cylinder(d=usb_sup_base_d, h=usb_sup_base_h);
         translate([0, 0, usb_sup_hole_h_of])
-          cylinder(d=usb_sup_hole_d * 1.1, h=usb_sup_base_h);
+          cylinder(d=usb_sup_hole_d, h=usb_sup_hole_h);
       }
+  }
+
+  // Reinforcements
+  translate([0, usb_sup_rein_d_of, usb_sup_rein_h_of]){
+    cube([usb_sup_rein_w, usb_sup_rein_tk, usb_sup_rein_h], center=true);
+
+    translate([usb_sup_rein_w_of, 0, 0])
+      cube([usb_sup_rein_tk, usb_sup_rein_d, usb_sup_rein_h], center=true);
+
+    translate([-usb_sup_rein_w_of, 0, 0])
+      cube([usb_sup_rein_tk, usb_sup_rein_d, usb_sup_rein_h], center=true);
   }
 }
 
